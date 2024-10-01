@@ -14,17 +14,19 @@ app.use(cors());
 mongoose.connect(process.env.MONGO_URI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
-  })
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+})
+	.then(() => console.log('MongoDB connected'))
+	.catch(err => console.error('MongoDB connection error:', err));
 
 
 // Models
 const Todo = require('./models/Todo');
 
 app.get('/todos', async (req, res) => {
+	console.log("hello")
 	const todos = await Todo.find();
-
+	
+	res.send("Hello")
 	res.json(todos);
 });
 
@@ -42,7 +44,7 @@ app.post('/todo/new', (req, res) => {
 app.delete('/todo/delete/:id', async (req, res) => {
 	const result = await Todo.findByIdAndDelete(req.params.id);
 
-	res.json({result});
+	res.json({ result });
 });
 
 app.get('/todo/complete/:id', async (req, res) => {
@@ -65,6 +67,6 @@ app.put('/todo/update/:id', async (req, res) => {
 	res.json(todo);
 });
 
-app.listen(process.env.PORT,()=>{
-	console.log("connected on:",process.env.PORT)
+app.listen(process.env.PORT, () => {
+	console.log("connected on:", process.env.PORT)
 });
