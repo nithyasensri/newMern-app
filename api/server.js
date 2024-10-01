@@ -23,6 +23,7 @@ app.get('/todos', async (req, res) => {
 	res.json(todos);
 });
 
+
 app.post('/todo/new', (req, res) => {
 	const todo = new Todo({
 		text: req.body.text
